@@ -8,16 +8,24 @@ const config = require("../../playwright.config");
 let loginPage;
 const env = config.default.use.env;
 
-
 test.describe('Login tests', () => {
 
     test.beforeEach(async ({ page }) => {
         loginPage = new LoginPage(page);
         await loginPage.open();
     });
-
     test('Login with valid data', async ({ page }) => {
         await loginPage.login(users[env].user.email, users[env].user.password);
+        await expect(page.locator("[class='logo']")).toBeVisible;
+    });
+
+
+    test.beforeEach(async ({ page }) => {
+        loginPage = new LoginPage(page);
+        await loginPage.open();
+    });
+    test('click sign up link', async ({ page }) => {
+        await loginPage.clicksignUpButton();
         await expect(page.locator("[class='logo']")).toBeVisible;
     });
 
