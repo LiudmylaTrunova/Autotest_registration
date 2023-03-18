@@ -16,10 +16,17 @@ test.describe('Registration tests', () => {
         await registrationPage.open();
     });
 
-    test.only('Registration with valid data', async ({ page }) => {
+    test ('Registration with valid data', async ({ page }) => {
         await registrationPage.registration('fullName', 'email@gmail.com', '123qwe!');
         await expect(page.locator("[class='logo']")).toBeVisible;
         //await expect(page.locator('h2')).toHaveText('Login form');
+    });
+
+    test.only('click sign in link', async ({ page }) => {
+        await registrationPage.clicksignInButton();
+        //await registrationPage.registration('fullName', 'email@gmail.com', '123qwe!');
+        //await expect(page.locator("[class='logo']")).toBeVisible;
+        await expect(page.locator('h2')).toHaveText('Login form');
     });
 
 });
