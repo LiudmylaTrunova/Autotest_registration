@@ -9,7 +9,6 @@ const config = require("../../playwright.config");
 let registrationPage;
 const env = config.default.use.env;
 
-
 test.describe('Registration tests', () => {
 
     test.beforeEach(async ({ page }) => {
@@ -17,9 +16,10 @@ test.describe('Registration tests', () => {
         await registrationPage.open();
     });
 
-    test('Registration with valid data', async ({ page }) => {
-        await registrationPage.registration(users[env].user.fullName, users[env].user.email, users[env].user.password);
+    test.only('Registration with valid data', async ({ page }) => {
+        await registrationPage.registration('fullName', 'email@gmail.com', '123qwe!');
         await expect(page.locator("[class='logo']")).toBeVisible;
+        //await expect(page.locator('h2')).toHaveText('Login form');
     });
 
 });
