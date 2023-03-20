@@ -5,9 +5,10 @@ const { RegistrationPage } = require('../pages/registrationPage');
 const { users } = require('../../test-data/users');
 const { userData } = require('../../test-data/data');
 const config = require("../../playwright.config");
+const { faker } = require('@faker-js/faker');
+const { registrationData } = require('../../test-data/registrationData');
 
 let registrationPage;
-const env = config.default.use.env;
 
 test.describe('Registration tests', () => {
 
@@ -15,22 +16,18 @@ test.describe('Registration tests', () => {
         registrationPage = new RegistrationPage(page);
         await registrationPage.open();
     });
-
     test('Registration with valid data', async ({ page }) => {
-        await registrationPage.registration('fullName', 'email@gmail.com', '123qwe!');
+        await registrationPage.registration(registrationData.fullName, registrationData.email, registrationData.password);
         await expect(page.locator("[class='logo']")).toBeVisible;
-        //await expect(page.locator('h2')).toHaveText('Login form');
     });
+
 
     test.beforeEach(async ({ page }) => {
         registrationPage = new RegistrationPage(page);
         await registrationPage.open();
     });
-
     test('click sign in link', async ({ page }) => {
         await registrationPage.clicksignInButton();
-        //await registrationPage.registration('fullName', 'email@gmail.com', '123qwe!');
-        //await expect(page.locator("[class='logo']")).toBeVisible;
         await expect(page.locator('h2')).toHaveText('Login form');
     });
 
