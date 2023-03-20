@@ -21,14 +21,9 @@ test.describe('Registration tests', () => {
         await expect(page.locator("[class='logo']")).toBeVisible;
     });
 
-
-    test.beforeEach(async ({ page }) => {
-        registrationPage = new RegistrationPage(page);
-        await registrationPage.open();
-    });
     test('click sign in link', async ({ page }) => {
         await registrationPage.clicksignInButton();
-        await expect(page.locator('h2')).toHaveText('Login form');
+        await expect(page.url()).toContain('/sign-in');
     });
 
 });

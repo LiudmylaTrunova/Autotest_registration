@@ -19,14 +19,9 @@ test.describe('Login tests', () => {
         await expect(page.locator("[class='logo']")).toBeVisible;
     });
 
-
-    test.beforeEach(async ({ page }) => {
-        loginPage = new LoginPage(page);
-        await loginPage.open();
-    });
     test('click sign up link', async ({ page }) => {
         await loginPage.clicksignUpButton();
-        await expect(page.locator("[class='logo']")).toBeVisible;
+        await expect(page.url()).toContain('/sign-up');
     });
 
 });
